@@ -1,6 +1,6 @@
 import { useCart } from '../context/CartContext';
 export default function Cart() {
-const { items, totalPrice, removeItem, clearCart } = useCart();
+const { items, totalPrice, incrementItem, decrementItem, removeItem, clearCart } = useCart();
 if (items.length === 0) {
 return (
 <div style={{ textAlign: 'center', padding: '3rem' }}>
@@ -21,9 +21,43 @@ padding: '1rem', borderBottom: '1px solid #eee',
 style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
 <div style={{ flex: 1 }}>
 <h4 style={{ margin: '0 0 0.25rem' }}>{item.title}</h4>
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+<button
+onClick={() => decrementItem(item.id)}
+style={{
+width: '32px',
+height: '32px',
+borderRadius: '4px',
+border: 'none',
+background: '#EBF5FB',
+color: '#1B4F72',
+cursor: 'pointer',
+fontSize: '1.1rem',
+fontWeight: 'bold',
+}}
+>
+-
+</button>
 <p style={{ margin: 0, color: '#666' }}>
-${item.price.toFixed(2)} x {item.quantity}
+Qty: {item.quantity}
 </p>
+<button
+onClick={() => incrementItem(item.id)}
+style={{
+width: '32px',
+height: '32px',
+borderRadius: '4px',
+border: 'none',
+background: '#27AE60',
+color: 'white',
+cursor: 'pointer',
+fontSize: '1.1rem',
+fontWeight: 'bold',
+}}
+>
++
+</button>
+</div>
 </div>
 <p style={{ fontWeight: 'bold' }}>
 ${(item.price * item.quantity).toFixed(2)}
